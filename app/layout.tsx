@@ -2,9 +2,23 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.dev',
+  title: 'Metro Bank',
+  description: 'Manage your finances with Metro Bank',
+  keywords: ['banking', 'finance', 'money management'],
+  openGraph: {
+    title: 'Metro Bank',
+    description: 'Manage your finances with Metro Bank',
+    type: 'website',
+    url: 'https://metrobank.com',
+    siteName: 'Metro Bank',
+  },
+  twitter: {
+    title: 'Metro Bank',
+    description: 'Manage your finances with Metro Bank',
+    card: 'summary_large_image',
+    site: '@metrobank',
+    creator: '@metrobank',
+  },
 }
 
 export default function RootLayout({
