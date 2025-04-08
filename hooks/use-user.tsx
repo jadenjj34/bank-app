@@ -12,10 +12,6 @@ interface User {
   tier: string
   phone: string
   address: string
-  city: string
-  state: string
-  zipCode: string
-  country: string
 }
 
 export function useUser() {
@@ -31,20 +27,17 @@ export function useUser() {
       return
     }
 
-    // Load all user data from localStorage
+    // In a real application, we would fetch user info from API
+    // This is a mock implementation
     const mockUser = {
       email,
-      firstName: localStorage.getItem("userFirstName") || "Victoria",
-      lastName: localStorage.getItem("userLastName") || "Porter",
-      profileImage: localStorage.getItem("userProfileImage"),
+      firstName: localStorage.getItem("userFirstName") || "John",
+      lastName: localStorage.getItem("userLastName") || "Doe",
+      profileImage: localStorage.getItem("userProfileImage") || null,
       netWorth: Number.parseFloat(localStorage.getItem("userNetWorth") || "14000000"),
       tier: localStorage.getItem("userTier") || "premium",
-      phone: localStorage.getItem("userPhone") || "+44 7537 134076",
-      address: localStorage.getItem("userAddress") || "15854 Wolf Mountain Rd",
-      city: localStorage.getItem("userCity") || "Grass Valley",
-      state: localStorage.getItem("userState") || "California",
-      zipCode: localStorage.getItem("userZipCode") || "95949",
-      country: localStorage.getItem("userCountry") || "United States",
+      phone: localStorage.getItem("userPhone") || "+1 (555) 123-4567",
+      address: localStorage.getItem("userAddress") || "123 Luxury Ave, New York, NY 10001",
     }
 
     setUser(mockUser)
@@ -54,34 +47,43 @@ export function useUser() {
   const updateUser = (updates: Partial<User>) => {
     if (!user) return
 
-    // Update localStorage for each field that changed
+    // Update localStorage
     Object.entries(updates).forEach(([key, value]) => {
       if (value !== undefined && value !== null) {
-        const storageKey = `user${key.charAt(0).toUpperCase() + key.slice(1)}`
-        localStorage.setItem(storageKey, value.toString())
+        localStorage.setItem(`user£{key.charAt(0).toUpperCase() + key.slice(1)}`, value.toString())
       }
     })
 
-    // Update state with new values
-    setUser(prev => {
-      if (!prev) return null
-      return {
-        ...prev,
-        ...updates
-      }
+    // Update user state
+    setUser({
+      ...user,
+      ...updates,
     })
   }
 
   const logout = () => {
-    // Clear all user-related data from localStorage
-    Object.keys(localStorage).forEach(key => {
-      if (key.startsWith('user')) {
-        localStorage.removeItem(key)
-      }
-    })
+    // Clear user data from localStorage
+    localStorage.removeItem("userEmail")
+    localStorage.removeItem("userFirstName")
+    localStorage.removeItem("userLastName")
+    localStorage.removeItem("userProfileImage")
+    localStorage.removeItem("userNetWorth")
+    localStorage.removeItem("userTier")
+    localStorage.removeItem("userPhone")
+    localStorage.removeItem("userAddress")
+
+    // Reset user state
     setUser(null)
-    router.push('/login')
+
+    // Redirect to login page
+    router.push("/")
   }
 
-  return { user, isLoading, updateUser, logout }
+  return {
+    user,
+    isLoading,
+    updateUser,
+    logout,
+  }
 }
+
