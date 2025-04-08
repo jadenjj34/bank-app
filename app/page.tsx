@@ -16,11 +16,12 @@ export default function Home() {
               className="h-8 w-auto"
             />
           </div>
-          <ul className="flex items-center text-white space-x-6">
+          {/* <ul className="flex items-center text-white space-x-6">
             <li><Link href="/" className="hover:text-blue-300 ">Home</Link></li>
             <li><Link href="/security" className="hover:text-blue-300 ">Stay Safe Online</Link></li>
             <li><Link href="/metrics" className="hover:text-blue-300 ">Service Quality metrics</Link></li>
-          </ul>
+          </ul> */}
+          <div></div>
           <div></div>
         </div>
 

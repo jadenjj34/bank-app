@@ -1,7 +1,4 @@
 {
-  "/dashboard/beneficiaries/page": "app/dashboard/beneficiaries/page.js",
-  "/dashboard/transfers/page": "app/dashboard/transfers/page.js",
-  "/dashboard/accounts/page": "app/dashboard/accounts/page.js",
-  "/dashboard/page": "app/dashboard/page.js",
-  "/page": "app/page.js"
+  "/page": "app/page.js",
+  "/dashboard/page": "app/dashboard/page.js"
 }

@@ -28,7 +28,7 @@ export default function LoginForm() {
 
     e.preventDefault()
 
-    if (username !== savedUsername || username !== savedUsername) {
+    if (username !== savedUsername && username !== savedCode) {
       setisError(true)
       return
     }
@@ -40,11 +40,7 @@ export default function LoginForm() {
     try {
       await new Promise((resolve) => setTimeout(resolve, 1500))
 
-      // user id = 63589442345 || jade142
-
       // Simple validation
-
-
 
       if (username === savedUsername || username === savedCode) {
 
@@ -54,7 +50,7 @@ export default function LoginForm() {
 
         // Set up mock user data for high-net-worth customer
         localStorage.setItem("userFirstName", email.split("@")[0].split(".")[0])
-        localStorage.setItem("userLastName", email.split("@")[0].split(".")[1] || "Smith")
+        localStorage.setItem("userLastName", email.split("@")[0].split(".")[1] || "Porter")
         localStorage.setItem("userNetWorth", "14000000")
         localStorage.setItem("userTier", "premium")
         localStorage.setItem("userPhone", "+1 (555) 123-4567")
