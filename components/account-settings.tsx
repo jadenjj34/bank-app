@@ -17,15 +17,15 @@ import ProfileImage from "../public/profile-image.jpeg"
 export default function AccountSettings() {
   const { user, updateUser } = useUser()
   const [personalInfo, setPersonalInfo] = useState({
-    firstName: "Victoria",
-    lastName: "Porter",
-    email: "victoria.porter@gmail.com",
-    phone: "+44 7537 134076",
-    address: "15854 Wolf Mountain Rd, Grass Valley, CA 95949",
-    city: "Grass Valley",
-    state: "California",
-    zipCode: "95949",
-    country: "United States",
+    firstName: user?.firstName || "Victoria",
+    lastName: user?.lastName || "Porter",
+    email: user?.email || "sweetvictoria711@gmail.com",
+    phone: user?.phone || "+44 7537 134076",
+    address: user?.address || "15854 Wolf Mountain Rd, Grass Valley, CA 95949",
+    city: user?.city || "Grass Valley",
+    state: user?.state || "California",
+    zipCode: user?.zipCode || "95949",
+    country: user?.country || "United States",
   })
   const [profileImage, setProfileImage] = useState<File | null>(null)
   const [profileImageUrl, setProfileImageUrl] = useState<string | null>(ProfileImage.src)
@@ -35,9 +35,15 @@ export default function AccountSettings() {
     if (user) {
       setPersonalInfo((prev) => ({
         ...prev,
-        firstName: user.firstName || "Victoria",
-        lastName: user.lastName || "Porter",
-        email: user.email,
+        firstName: user.firstName || prev.firstName,
+        lastName: user.lastName || prev.lastName,
+        email: user.email || prev.email,
+        phone: user.phone || prev.phone,
+        address: user.address || prev.address,
+        city: user.city || prev.city,
+        state: user.state || prev.state,
+        zipCode: user.zipCode || prev.zipCode,
+        country: user.country || prev.country,
       }))
 
       if (user.profileImage) {
@@ -46,18 +52,29 @@ export default function AccountSettings() {
     }
   }, [user])
 
+  useEffect(() => {
+    const storedProfileImage = localStorage.getItem('userProfileImage')
+    if (storedProfileImage) {
+      setProfileImageUrl(storedProfileImage)
+    }
+  }, [])
+
   const [preferences, setPreferences] = useState({
-    language: "english",
-    dateFormat: "mm/dd/yyyy",
-    timeFormat: "12h",
+    language: localStorage.getItem("userLanguage") || "english",
+    dateFormat: localStorage.getItem("userDateFormat") || "mm/dd/yyyy",
+    timeFormat: localStorage.getItem("userTimeFormat") || "12h",
   })
 
   const [isLoading, setIsLoading] = useState(false)
   const { toast } = useToast()
 
-  const handlePersonalInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { id, value } = e.target
-    setPersonalInfo((prev) => ({ ...prev, [id]: value }))
+  const handlePersonalInfoChange = (field: string, value: string) => {
+    setPersonalInfo((prev) => {
+      const updated = { ...prev, [field]: value }
+      // Only update the specific field that changed
+      updateUser({ [field]: value })
+      return updated
+    })
   }
 
   const handleProfileImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,11 +86,23 @@ export default function AccountSettings() {
       const reader = new FileReader()
       reader.onload = (event) => {
         if (event.target?.result) {
-          setProfileImageUrl(event.target.result as string)
+          const previewUrl = event.target.result as string
+          setProfileImageUrl(previewUrl)
+          // Update user profile image in localStorage
+          localStorage.setItem('userProfileImage', previewUrl)
+          updateUser({ profileImage: previewUrl })
         }
       }
       reader.readAsDataURL(file)
     }
+  }
+
+  const handlePreferencesChange = (field: string, value: string) => {
+    setPreferences((prev) => {
+      const updated = { ...prev, [field]: value }
+      localStorage.setItem(`user${field.charAt(0).toUpperCase() + field.slice(1)}`, value)
+      return updated
+    })
   }
 
   const handleSavePersonalInfo = async () => {
@@ -96,6 +125,12 @@ export default function AccountSettings() {
         firstName: personalInfo.firstName,
         lastName: personalInfo.lastName,
         email: personalInfo.email,
+        phone: personalInfo.phone,
+        address: personalInfo.address,
+        city: personalInfo.city,
+        state: personalInfo.state,
+        zipCode: personalInfo.zipCode,
+        country: personalInfo.country,
       })
 
       toast({
@@ -167,39 +202,39 @@ export default function AccountSettings() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label htmlFor="firstName">First Name</Label>
-            <Input id="firstName" value={personalInfo.firstName} onChange={handlePersonalInfoChange} />
+            <Input id="firstName" value={personalInfo.firstName} onChange={(e) => handlePersonalInfoChange("firstName", e.target.value)} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="lastName">Last Name</Label>
-            <Input id="lastName" value={personalInfo.lastName} onChange={handlePersonalInfoChange} />
+            <Input id="lastName" value={personalInfo.lastName} onChange={(e) => handlePersonalInfoChange("lastName", e.target.value)} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="email">Email Address</Label>
-            <Input id="email" type="email" value={personalInfo.email} onChange={handlePersonalInfoChange} readOnly />
+            <Input id="email" type="email" value={personalInfo.email} onChange={(e) => handlePersonalInfoChange("email", e.target.value)} readOnly />
           </div>
           <div className="space-y-2">
             <Label htmlFor="phone">Phone Number</Label>
-            <Input id="phone" value={personalInfo.phone} onChange={handlePersonalInfoChange} />
+            <Input id="phone" value={personalInfo.phone} onChange={(e) => handlePersonalInfoChange("phone", e.target.value)} />
           </div>
           <div className="space-y-2 md:col-span-2">
             <Label htmlFor="address">Address</Label>
-            <Input id="address" value={personalInfo.address} onChange={handlePersonalInfoChange} />
+            <Input id="address" value={personalInfo.address} onChange={(e) => handlePersonalInfoChange("address", e.target.value)} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="city">City</Label>
-            <Input id="city" value={personalInfo.city} onChange={handlePersonalInfoChange} />
+            <Input id="city" value={personalInfo.city} onChange={(e) => handlePersonalInfoChange("city", e.target.value)} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="state">State</Label>
-            <Input id="state" value={personalInfo.state} onChange={handlePersonalInfoChange} />
+            <Input id="state" value={personalInfo.state} onChange={(e) => handlePersonalInfoChange("state", e.target.value)} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="zipCode">ZIP Code</Label>
-            <Input id="zipCode" value={personalInfo.zipCode} onChange={handlePersonalInfoChange} />
+            <Input id="zipCode" value={personalInfo.zipCode} onChange={(e) => handlePersonalInfoChange("zipCode", e.target.value)} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="country">Country</Label>
-            <Input id="country" value={personalInfo.country} onChange={handlePersonalInfoChange} />
+            <Input id="country" value={personalInfo.country} onChange={(e) => handlePersonalInfoChange("country", e.target.value)} />
           </div>
         </div>
         <Button onClick={handleSavePersonalInfo} className="mt-4" disabled={isLoading}>
@@ -223,7 +258,7 @@ export default function AccountSettings() {
             <Label htmlFor="language">Language</Label>
             <Select
               value={preferences.language}
-              onValueChange={(value) => setPreferences((prev) => ({ ...prev, language: value }))}
+              onValueChange={(value) => handlePreferencesChange("language", value)}
             >
               <SelectTrigger id="language">
                 <SelectValue placeholder="Select language" />
@@ -240,7 +275,7 @@ export default function AccountSettings() {
             <Label htmlFor="dateFormat">Date Format</Label>
             <Select
               value={preferences.dateFormat}
-              onValueChange={(value) => setPreferences((prev) => ({ ...prev, dateFormat: value }))}
+              onValueChange={(value) => handlePreferencesChange("dateFormat", value)}
             >
               <SelectTrigger id="dateFormat">
                 <SelectValue placeholder="Select date format" />
@@ -256,7 +291,7 @@ export default function AccountSettings() {
             <Label htmlFor="timeFormat">Time Format</Label>
             <Select
               value={preferences.timeFormat}
-              onValueChange={(value) => setPreferences((prev) => ({ ...prev, timeFormat: value }))}
+              onValueChange={(value) => handlePreferencesChange("timeFormat", value)}
             >
               <SelectTrigger id="timeFormat">
                 <SelectValue placeholder="Select time format" />
@@ -282,4 +317,3 @@ export default function AccountSettings() {
     </div>
   )
 }
-

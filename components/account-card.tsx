@@ -28,7 +28,7 @@ interface AccountCardProps {
 }
 
 export default function AccountCard({ account }: AccountCardProps) {
-  const [showBalance, setShowBalance] = useState(true)
+  const [showBalance, setShowBalance] = useState(false)
   const [showDetails, setShowDetails] = useState(false)
   const router = useRouter()
 

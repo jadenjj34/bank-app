@@ -37,7 +37,7 @@ export default function AccountsClientPage() {
       id: "2",
       name: "Wealth Management Savings",
       number: "**** 7291",
-      balance: 5000000, // £5,000,000 - savings account
+      balance: 50000, // £5,000,000 - savings account
       type: "savings",
       features: [
         "3.5% annual interest",
@@ -49,7 +49,7 @@ export default function AccountsClientPage() {
       id: "3",
       name: "Private Wealth Investment",
       number: "**** 1548",
-      balance: 9000000, // £9,000,000 - investment account
+      balance: 900000, // £9,000,000 - investment account
       type: "investment",
       features: [
         "Dedicated portfolio manager",

@@ -8,13 +8,13 @@ import { useUser } from "@/hooks/use-user"
 import { formatCurrency } from "@/lib/utils"
 
 export default function AccountSummary() {
-  const [showBalance, setShowBalance] = useState(true)
+  const [showBalance, setShowBalance] = useState(false)
   const { user } = useUser()
 
   // Set fixed balance for our high-net-worth customer
   const mainAccountBalance = 14020000 // £14,020,000 - current account balance
-  const savingsBalance = 5000000 // £5,000,000 - savings account balance
-  const investmentBalance = 9000000 // £9,000,000 - investment account balance
+  const savingsBalance = 500000 // £5,000,000 - savings account balance
+  const investmentBalance = 900000 // £9,000,000 - investment account balance
 
   // Calculate total balance
   const totalBalance = mainAccountBalance + savingsBalance + investmentBalance

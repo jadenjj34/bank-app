@@ -49,12 +49,21 @@ export default function LoginForm() {
         localStorage.setItem("username", username)
 
         // Set up mock user data for high-net-worth customer
-        localStorage.setItem("userFirstName", email.split("@")[0].split(".")[0])
-        localStorage.setItem("userLastName", email.split("@")[0].split(".")[1] || "Porter")
+        const firstName = "Victoria"
+        const lastName = "Porter"
+        localStorage.setItem("userFirstName", firstName)
+        localStorage.setItem("userLastName", lastName)
         localStorage.setItem("userNetWorth", "14000000")
         localStorage.setItem("userTier", "premium")
-        localStorage.setItem("userPhone", "+1 (555) 123-4567")
-        localStorage.setItem("userAddress", "123 Luxury Ave, New York, NY 10001")
+        localStorage.setItem("userPhone", "+44 7537 134076")
+        localStorage.setItem("userAddress", "15854 Wolf Mountain Rd")
+        localStorage.setItem("userCity", "Grass Valley")
+        localStorage.setItem("userState", "California")
+        localStorage.setItem("userZipCode", "95949")
+        localStorage.setItem("userCountry", "United States")
+        localStorage.setItem("userLanguage", "english")
+        localStorage.setItem("userDateFormat", "mm/dd/yyyy")
+        localStorage.setItem("userTimeFormat", "12h")
 
         toast({
           title: "Login successful",
@@ -149,4 +158,3 @@ export default function LoginForm() {
     </form>
   )
 }
-
