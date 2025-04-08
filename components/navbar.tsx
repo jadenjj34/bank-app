@@ -52,8 +52,7 @@ export default function Navbar() {
             <DropdownMenuContent align="end" className="w-56">
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => router.push('/profile')}>Profile</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => router.push('/settings')}>Settings</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => router.push('/dashboard/settings')}>Profile</DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
             </DropdownMenuContent>
