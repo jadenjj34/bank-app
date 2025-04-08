@@ -12,30 +12,31 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Loader2 } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import { useUser } from "@/hooks/use-user"
+import ProfileImage from "../public/profile-image.jpeg"
 
 export default function AccountSettings() {
   const { user, updateUser } = useUser()
   const [personalInfo, setPersonalInfo] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "+1 (555) 123-4567",
-    address: "50 Grafton Close",
-    city: "",
-    state: "",
-    zipCode: "",
-    country: "United Kingdom",
+    firstName: "Victoria",
+    lastName: "Porter",
+    email: "victoria.porter@gmail.com",
+    phone: "+44 7537 134076",
+    address: "15854 Wolf Mountain Rd, Grass Valley, CA 95949",
+    city: "Grass Valley",
+    state: "California",
+    zipCode: "95949",
+    country: "United States",
   })
   const [profileImage, setProfileImage] = useState<File | null>(null)
-  const [profileImageUrl, setProfileImageUrl] = useState<string | null>(null)
+  const [profileImageUrl, setProfileImageUrl] = useState<string | null>(ProfileImage.src)
 
   // Load user data when component mounts
   useEffect(() => {
     if (user) {
       setPersonalInfo((prev) => ({
         ...prev,
-        firstName: user.firstName || "John",
-        lastName: user.lastName || "Doe",
+        firstName: user.firstName || "Victoria",
+        lastName: user.lastName || "Porter",
         email: user.email,
       }))
 

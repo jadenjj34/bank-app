@@ -51,13 +51,13 @@ export default function QuickActions() {
       color: "bg-indigo-100 text-indigo-700",
       action: () => router.push("/dashboard/analytics"),
     },
-    {
-      title: "Investment Portfolio",
-      icon: BarChart3,
-      description: "Manage your investments",
-      color: "bg-amber-100 text-amber-700",
-      action: () => router.push("/dashboard/investments"),
-    },
+    // {
+    //   title: "Investment Portfolio",
+    //   icon: BarChart3,
+    //   description: "Manage your investments",
+    //   color: "bg-amber-100 text-amber-700",
+    //   action: () => router.push("/dashboard/investments"),
+    // },
     // {
     //   title: "Wealth Planning",
     //   icon: Briefcase,
@@ -118,7 +118,7 @@ export default function QuickActions() {
         <CardTitle>Quick Actions</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3  gap-4">
           {actions.map((action) => (
             <button
               key={action.title}

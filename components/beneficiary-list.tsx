@@ -9,51 +9,26 @@ import { ArrowUpRight, MoreHorizontal, Search } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 
 // Mock beneficiaries data
+
+
 const initialBeneficiaries = [
   {
     id: "1",
-    name: "John Smith",
+    name: "Constance Campbell",
     accountNumber: "**** 5678",
     bankName: "Chase Bank",
-    email: "john.smith@example.com",
+    email: "constance2ll@gmail.com",
     type: "Personal",
     lastTransfer: "Mar 15, 2023",
   },
   {
     id: "2",
-    name: "Sarah Johnson",
+    name: "Thomas Steward",
     accountNumber: "**** 9012",
     bankName: "Bank of America",
-    email: "sarah.j@example.com",
+    email: "thomas1234.@gmail.com",
     type: "Personal",
     lastTransfer: "Feb 28, 2023",
-  },
-  {
-    id: "3",
-    name: "Mike's Rent",
-    accountNumber: "**** 3456",
-    bankName: "Wells Fargo",
-    email: "mike@example.com",
-    type: "Rent",
-    lastTransfer: "Mar 3, 2023",
-  },
-  {
-    id: "4",
-    name: "Mom",
-    accountNumber: "**** 7890",
-    bankName: "Citibank",
-    email: "mom@example.com",
-    type: "Family",
-    lastTransfer: "Feb 15, 2023",
-  },
-  {
-    id: "5",
-    name: "Electricity Company",
-    accountNumber: "**** 1234",
-    bankName: "US Bank",
-    email: "billing@electric.com",
-    type: "Utility",
-    lastTransfer: "Mar 15, 2023",
   },
 ]
 

@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Eye, EyeOff, CreditCard, Wallet, LineChart } from "lucide-react"
+import { Eye, EyeOff, CreditCard, Wallet, LineChart, Banknote } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { formatCurrency } from "@/lib/utils"
 import {
@@ -23,6 +23,7 @@ interface AccountCardProps {
     number: string
     balance: number
     type: string
+    features?: string[]
   }
 }
 
@@ -36,9 +37,13 @@ export default function AccountCard({ account }: AccountCardProps) {
       case "checking":
         return <CreditCard className="h-6 w-6 text-primary" />
       case "savings":
-        return <Wallet className="h-6 w-6 text-primary" />
+        return <Wallet className="h-6 w-6 text-green-600" />
       case "investment":
-        return <LineChart className="h-6 w-6 text-primary" />
+        return <LineChart className="h-6 w-6 text-blue-600" />
+      case "moneyMarket":
+        return <Banknote className="h-6 w-6 text-purple-600" />
+      case "credit":
+        return <CreditCard className="h-6 w-6 text-pink-600" />
       default:
         return <CreditCard className="h-6 w-6 text-primary" />
     }
@@ -62,6 +67,18 @@ export default function AccountCard({ account }: AccountCardProps) {
           <div>
             <div className="text-2xl font-bold">{showBalance ? formatCurrency(account.balance) : "••••••••"}</div>
             <p className="text-xs text-muted-foreground">{account.number}</p>
+            {account.features && (
+              <div className="mt-2 space-y-1">
+                <p className="text-sm font-medium">Features:</p>
+                <ul className="space-y-1">
+                  {account.features.map((feature, index) => (
+                    <li key={index} className="text-sm text-muted-foreground">
+                      <span className="mr-2">•</span>{feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
         <div className="mt-4 grid grid-cols-2 gap-2">
@@ -87,4 +104,3 @@ export default function AccountCard({ account }: AccountCardProps) {
     </Card>
   )
 }
-

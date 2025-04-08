@@ -22,7 +22,7 @@ export default function TransfersPage() {
       <Tabs defaultValue="new-transfer" className="space-y-6">
         <TabsList>
           <TabsTrigger value="new-transfer">New Transfer</TabsTrigger>
-          <TabsTrigger value="scheduled">Scheduled</TabsTrigger>
+          {/* <TabsTrigger value="scheduled">Scheduled</TabsTrigger> */}
           <TabsTrigger value="history">History</TabsTrigger>
         </TabsList>
 
@@ -30,7 +30,7 @@ export default function TransfersPage() {
           <div className="grid gap-6 md:grid-cols-2">
             <TransferForm />
 
-            <Card>
+            {/* <Card>
               <CardHeader>
                 <CardTitle>Recent Recipients</CardTitle>
                 <CardDescription>Quickly transfer to your recent recipients</CardDescription>
@@ -55,7 +55,7 @@ export default function TransfersPage() {
                   ))}
                 </div>
               </CardContent>
-            </Card>
+            </Card> */}
           </div>
         </TabsContent>
 

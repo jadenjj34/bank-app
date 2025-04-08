@@ -12,9 +12,12 @@ export default function AccountSummary() {
   const { user } = useUser()
 
   // Set fixed balance for our high-net-worth customer
-  const mainAccountBalance = 14000000 // £14 million
-  const savingsBalance = 5000000 // £5 million for savings
-  const investmentBalance = 9000000 // £9 million in investments
+  const mainAccountBalance = 14020000 // £14,020,000 - current account balance
+  const savingsBalance = 5000000 // £5,000,000 - savings account balance
+  const investmentBalance = 9000000 // £9,000,000 - investment account balance
+
+  // Calculate total balance
+  const totalBalance = mainAccountBalance + savingsBalance + investmentBalance
 
   return (
     <Card className="col-span-1">

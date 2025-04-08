@@ -18,19 +18,36 @@ export default function LoginForm() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const [isError, setisError] = useState(false)
   const router = useRouter()
   const { toast } = useToast()
 
   const handleSubmit = async (e: React.FormEvent) => {
+    const savedUsername = "jade142"
+    const savedCode = "63589442345"
+
     e.preventDefault()
+
+    if (username !== savedUsername || username !== savedUsername) {
+      setisError(true)
+      return
+    }
+
     setIsLoading(true)
 
     // Simulate API call
+
     try {
       await new Promise((resolve) => setTimeout(resolve, 1500))
 
+      // user id = 63589442345 || jade142
+
       // Simple validation
-      if (username) {
+
+
+
+      if (username === savedUsername || username === savedCode) {
+
         // Store user email in localStorage for use across app
         localStorage.setItem("userEmail", email)
         localStorage.setItem("username", username)
@@ -49,7 +66,7 @@ export default function LoginForm() {
         })
         router.push("/dashboard")
       } else {
-        throw new Error("Please enter both email and password")
+        setisError(true)
       }
     } catch (error) {
       toast({
@@ -64,6 +81,9 @@ export default function LoginForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {isError && (
+        <div className="py-2 text-red-600 text-center"> Invalid credentials </div>
+      )}
       <div className="space-y-2">
         <Label htmlFor="username" className="font-semibold  ">Enter your 12-digit customer number or username </Label>
         <Input
