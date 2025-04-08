@@ -19,7 +19,7 @@ export default function AccountSettings() {
   const [personalInfo, setPersonalInfo] = useState({
     firstName: "Victoria",
     lastName: "Porter",
-    email: "victoria.porter@gmail.com",
+    email: "sweetvictoria711@gmail.com",
     phone: "+44 7537 134076",
     address: "15854 Wolf Mountain Rd, Grass Valley, CA 95949",
     city: "Grass Valley",
